@@ -1,23 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import { StockOverviewPage } from './Pages/StockOverviewPage';
+import { StockDetailPage } from './Pages/StockDetailPage';
+import { WatchListContextProvider } from './context/context';
+import Trading from './Pages/Trading.jpg'
 
 function App() {
+  const myStyle={
+    backgroundImage: `url(${Trading})` ,
+    height:'100vh',
+    marginTop:'0px',
+    // opacity: '0.4',
+    backgroundRepeat: 'no-repeat',
+};
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id = "block"className="image" style= {myStyle}>
+      <main className="container">
+      <div id = "ds"className='imgd'>
+      <WatchListContextProvider>
+      <BrowserRouter>
+      <Routes>
+        <Route path = "/" element= {<StockOverviewPage/>}/>
+        <Route path = "/detail/:symbol" element = {<StockDetailPage/>}/>
+      </Routes>
+      </BrowserRouter>
+      </WatchListContextProvider>
+      </div>
+      </main>
     </div>
   );
 }
